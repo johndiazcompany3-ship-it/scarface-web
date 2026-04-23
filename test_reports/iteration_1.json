@@ -1,0 +1,42 @@
+{
+  "summary": "Comprehensive frontend-only UI testing of Scarface Restaurante Ávila landing page at https://scarface-cocina.preview.emergentagent.com/. All 15 required data-testid elements present; all hrefs correct (wa.me/34623513639, tel:+34623513639); hero scroll-scrub canvas renders and pixel values change on scroll (255,203,136 -> 69,56,1); 'Ver la carta' scrolls to #carta section; FAQ accordion expands; galeria has 8 images; mobile (390x844) shows sticky bar + toggle + drawer correctly while desktop nav is hidden; no horizontal overflow; zero runtime errors (only one benign Canvas2D willReadFrequently performance warning).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Mobile (390x844)", "issues": ["Emergent platform 'Made with Emergent' badge overlaps the bottom-right 'WhatsApp' button of mobile-sticky-bar, partially hiding it. This is an Emergent platform injection, not application code — app team may need to raise z-index/position of its sticky bar slightly above the badge or leave right padding."]}
+    ]
+  },
+  "test_report_links": ["/app/test_reports/iteration_1.json"],
+  "action_items": [
+    "(Optional/Low) Pass { willReadFrequently: true } when calling canvas.getContext('2d') in components/ScrubSequence.jsx to silence the Chrome performance warning since the scrub reads frames frequently during scroll.",
+    "(Optional/Low) On mobile viewport, reserve space or adjust z-index/right offset for the 'WhatsApp' button in MobileStickyBar so the Emergent preview badge does not overlap it."
+  ],
+  "critical_code_review_comments": [
+    "ScrubSequence canvas: add willReadFrequently:true to getContext('2d') to avoid the console warning and match usage pattern (frame-by-frame draw on scroll).",
+    "Hero CTA secondary uses href='#carta' — works, but consider smooth-scroll behaviour and scroll-margin-top on #carta so the fixed navbar does not cover the section heading.",
+    "Every section has data-testids, Pydantic-style testability is excellent. No code-quality blockers found."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "100%"},
+  "test_credentials": "N/A — no auth on this marketing site",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Landing page is stable and complete. All required testids: site-navbar, nav-cta-reserve, nav-mobile-toggle, mobile-menu, hero-section, hero-scrub-canvas, hero-headline, hero-cta-primary, hero-cta-secondary, carta-section, menu-dia-section, galeria-section, stats-section, testimonials-section, faq-section (faq-item-0..5), cta-footer-section, whatsapp-floating-button, mobile-sticky-bar are all present and functional. Canvas scrub verified by sampling pixel color before/after scroll — values differ confirming frames are being drawn. Scroll to #carta from secondary CTA lands at scrollY=2656. No horizontal overflow (bodyW=winW=1920). Only benign warning in console.",
+  "verified_elements": {
+    "desktop_testids_present": 15,
+    "faq_items_found": 6,
+    "galeria_images": 8,
+    "nav_links_desktop": ["SCARFACE", "Carta", "Menú del Día", "Galería", "Contacto", "Reservar"],
+    "hero_headline": "Sabor. Sin concesiones.",
+    "hero_cta_primary_href": "https://wa.me/34623513639?text=...",
+    "hero_cta_secondary_href": "#carta",
+    "whatsapp_floating_href": "https://wa.me/34623513639?text=...",
+    "mobile_sticky_bar_hrefs": ["tel:+34623513639", "https://wa.me/34623513639?text=..."],
+    "canvas_pixel_change_on_scroll": "[255,203,136,255] -> [69,56,1,255] (confirmed drawing)",
+    "faq_item_0_expansion": "89px -> 147px (expanded)",
+    "mobile_view": "toggle+sticky bar visible, desktop nav hidden, drawer opens"
+  }
+}

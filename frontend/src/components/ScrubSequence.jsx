@@ -130,7 +130,7 @@ export function ScrubSequence({
   const drawImage = (img) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: false, alpha: true });
     if (!ctx) return;
     const cw = canvas.width;
     const ch = canvas.height;

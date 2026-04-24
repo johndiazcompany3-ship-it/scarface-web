@@ -1,0 +1,50 @@
+{
+  "summary": "Comprehensive frontend validation of Scarface Ávila cinematic landing page after hero/SEO/facade/maps/Instagram/WhatsApp enhancements. Tested on desktop (1440x900) and mobile (375x812). All critical flows pass: hero headline now visible with readable cream color, all CTAs href correct, navbar/mobile drawer/sticky-bar working, FAQ accordion expands, Google Maps iframe renders with correct src, SEO meta + JSON-LD Restaurant schema with telephone +34623513639, WhatsApp floating button correct. 0 console errors, 0 broken images, no horizontal overflow.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_checks": {
+    "hero_headline_visible": "PASS - text 'Sabor. Sin concesiones.' rendered in cream rgb(233,227,216) with hero-shimmer class and heroSheen 6s animation; visible screenshot confirms readability over facade photo",
+    "whatsapp_floating_button": "PASS - href='https://wa.me/34623513639' exactly, target=_blank, rel='noopener noreferrer', aria-label present, position:fixed, z-index:9999, bottom-right",
+    "hero_cta_primary": "PASS - href starts with https://wa.me/34623513639, target=_blank, rel=noopener noreferrer",
+    "hero_cta_secondary": "PASS - href='#carta' (scroll to carta verified: 0 -> 2069)",
+    "nav_cta_reserve": "PASS - wa.me href, target=_blank, visible on desktop",
+    "nav_phone": "PASS - href='tel:+34623513639', visible on desktop",
+    "nav_links_scroll": "PASS - clicking Carta scrolls page (0 -> 2069)",
+    "mobile_nav": "PASS - desktop nav hidden on 375w, nav-mobile-toggle visible, mobile-menu drawer opens, drawer link scrolls (0->2091) and closes drawer",
+    "mobile_sticky_bar": "PASS - position:fixed, display:flex, 375x64 at y=748 on mobile; display:none on desktop; contains tel:+34623513639 (Llamar) + wa.me/34623513639 (WhatsApp)",
+    "faq_accordion": "PASS - faq-item-0..5 all present; clicking faq-item-0 expands (inner_text 19 -> 108 chars)",
+    "menu_cta_reserve": "PASS - wa.me href",
+    "footer_cta_reserve_whatsapp": "PASS - wa.me href, target=_blank",
+    "footer_cta_phone": "PASS - tel:+34623513639",
+    "footer_address": "PASS - anchor href to maps.google.com/?q=Calle+Enrique+Larreta+7+Avila",
+    "footer_instagram": "PASS - href='https://instagram.com/scarface.avila', target=_blank, rel=noopener noreferrer",
+    "fachada_section": "PASS - fachada-section + fachada-image (lazy-loaded, naturalWidth=1376 after scroll) + fachada-maps-link present",
+    "google_maps_iframe": "PASS - wrapper [data-testid='google-maps'] contains iframe with src='https://www.google.com/maps?q=Calle+Enrique+Larreta+7,+05001+%C3%81vila,+Espa%C3%B1a&output=embed' (contains google.com/maps AND Enrique+Larreta+7)",
+    "seo_meta": "PASS - title='Scarface Restaurante Ávila · Cocina mexicana & española · Reservas', og:title + og:image present, JSON-LD @type:Restaurant with telephone:'+34623513639'",
+    "wa_me_hrefs_exact": "PASS - all wa.me hrefs start with 'https://wa.me/34623513639' (some include ?text= query)",
+    "canvas_scrub": "PASS - canvas 1440x900 with non-zero dims; center pixel color changes on scroll (224,221,214 -> 197,184,158) confirming frame sequence renders",
+    "hero_parallax": "PASS - headline parent inline-style transform changes with scroll (translateY(-80px) -> none); subY parallax also applied",
+    "pulse_avila_badge": "PASS - motion.span animates box-shadow (pulse halo) via framer-motion",
+    "hero_shimmer": "PASS - hero-headline has class 'hero-shimmer' with CSS animation-name: heroSheen, duration 6s",
+    "no_errors_no_overflow_no_broken_images": "PASS - 0 page errors, 0 broken images, docW==winW (1440/375)"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor: `offsetParent` is null for position:fixed elements (not a bug, but any future Playwright checks should use getBoundingClientRect + computed display/visibility instead).",
+    "Fachada image uses loading='lazy' - requires scroll-into-view for naturalWidth to populate; acceptable but note for future tests.",
+    "Headline parallax: at scrollY=0 transform is translateY(-80px) due to the 250vh sticky hero starting past 'start start' offset; at scrollY=1000 it becomes 'none'. Parallax works but the direction might feel counter-intuitive to designers — consider reviewing the useTransform input range if intended effect is lift-on-scroll rather than settle-on-scroll.",
+    "Console warning (framer-motion): 'Please ensure that the container has a non-static position' — low priority but could be suppressed by ensuring the useScroll target ref container is explicitly position:relative/absolute/fixed."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Landing page fully verified on desktop 1440x900 and mobile 375x812. All 20+ UX contracts from review request pass. The hero headline visibility regression is resolved — computed color is rgb(233,227,216) with readable shadow over facade photo. If re-testing, remember: (1) google-maps testid is on WRAPPER div, iframe is child; (2) fachada-image is lazy-loaded so scroll_into_view_if_needed before checking naturalWidth; (3) mobile-sticky-bar has position:fixed so use getBoundingClientRect not offsetParent for visibility; (4) do NOT navigate to wa.me/tel: URLs in headless — only inspect href attributes.",
+  "rca_of_the_issue": "No regressions found. Previous concern (invisible hero headline due to background-clip:text without fallback color) has been fixed via explicit text color rgb(233,227,216) on .text-foreground combined with background-repeat:no-repeat shimmer gradient — headline is now clearly readable in screenshot capture and computed styles verify color/background/webkit-text-fill-color are all set correctly."
+}

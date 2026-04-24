@@ -13,6 +13,9 @@ export const ADDRESS = "Calle Enrique Larreta, 7 · 05001 Ávila";
 export const MAPS_URL =
   "https://maps.google.com/?q=Calle+Enrique+Larreta+7+Avila";
 
+export const INSTAGRAM_URL = "https://instagram.com/scarface.avila";
+export const INSTAGRAM_HANDLE = "@scarface.avila";
+
 export const NAV_ITEMS = [
   { label: "Carta", href: "#carta" },
   { label: "Menú del Día", href: "#menu" },

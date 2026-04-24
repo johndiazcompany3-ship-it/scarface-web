@@ -9,6 +9,7 @@ import { Stats } from "@/components/Stats";
 import { Testimonials } from "@/components/Testimonials";
 import { Faq } from "@/components/Faq";
 import { CtaFooter } from "@/components/CtaFooter";
+import { Fachada } from "@/components/Fachada";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
 
@@ -22,6 +23,7 @@ function App() {
         <Carta />
         <MenuDia />
         <Galeria />
+        <Fachada />
         <Stats />
         <Testimonials />
         <Faq />

@@ -8,6 +8,8 @@ import {
   TEL_DISPLAY,
   EMAIL,
   WA_RESERVA,
+  INSTAGRAM_URL,
+  INSTAGRAM_HANDLE,
 } from "../lib/constants";
 
 export function CtaFooter() {
@@ -77,7 +79,7 @@ export function CtaFooter() {
         </div>
 
         {/* Info grid */}
-        <div className="grid md:grid-cols-3 gap-5 mb-24">
+        <div className="grid md:grid-cols-4 gap-5 mb-24">
           <a
             href={MAPS_URL}
             target="_blank"
@@ -117,10 +119,25 @@ export function CtaFooter() {
               {EMAIL}
             </div>
           </a>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="liquid-glass-strong rounded-3xl p-8 hover:-translate-y-1 transition-transform"
+            data-testid="footer-instagram"
+          >
+            <Instagram className="w-5 h-5 text-primary mb-4" />
+            <div className="text-xs uppercase tracking-[0.2em] text-foreground/50 mb-2">
+              Instagram
+            </div>
+            <div className="font-display text-2xl tracking-wide">
+              {INSTAGRAM_HANDLE}
+            </div>
+          </a>
         </div>
 
         {/* Horarios */}
-        <div className="liquid-glass rounded-3xl p-8 md:p-10 mb-20 flex flex-wrap gap-8 items-center justify-between">
+        <div className="liquid-glass rounded-3xl p-8 md:p-10 mb-12 flex flex-wrap gap-8 items-center justify-between">
           <div>
             <div className="text-xs uppercase tracking-[0.3em] text-primary mb-3">
               Horario
@@ -138,6 +155,23 @@ export function CtaFooter() {
           >
             Reservar mesa
           </a>
+        </div>
+
+        {/* Google Maps */}
+        <div
+          className="relative overflow-hidden rounded-3xl border border-white/10 mb-20"
+          data-testid="google-maps"
+        >
+          <iframe
+            title="Mapa de Scarface Restaurante Ávila"
+            src="https://www.google.com/maps?q=Calle+Enrique+Larreta+7,+05001+Ávila,+España&output=embed"
+            width="100%"
+            height="420"
+            style={{ border: 0, filter: "grayscale(0.3) contrast(1.05)" }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
         </div>
 
         {/* Footer */}

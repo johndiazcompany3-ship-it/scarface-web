@@ -1,50 +1,74 @@
 import { motion } from "framer-motion";
-import { WA_RESERVA } from "../lib/constants";
+
+const WHATSAPP_URL = "https://wa.me/34623513639";
 
 export function WhatsAppButton() {
   return (
     <motion.a
-      href={WA_RESERVA}
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Reservar por WhatsApp"
+      aria-label="Escríbenos por WhatsApp al 623 513 639"
       data-testid="whatsapp-floating-button"
       initial={{ y: 80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 1.5, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="group fixed bottom-24 md:bottom-6 right-4 md:right-6 z-[9999] flex items-center"
-      style={{ filter: "drop-shadow(0 10px 25px rgba(37,211,102,0.35))" }}
+      transition={{ delay: 1.2, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.95 }}
+      className="group fixed z-[9999] flex items-center
+                 bottom-[80px] right-4
+                 sm:bottom-6 sm:right-6"
+      style={{
+        filter:
+          "drop-shadow(0 8px 20px rgba(37,211,102,0.45)) drop-shadow(0 0 30px rgba(37,211,102,0.25))",
+      }}
     >
-      {/* Tooltip (desktop only) */}
+      {/* Desktop tooltip */}
       <span
-        className="hidden md:flex items-center mr-3 px-4 py-2 rounded-full text-sm font-medium text-[#0d0605] opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap"
-        style={{ background: "#ffffff" }}
+        className="hidden md:inline-flex items-center mr-3 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap
+                   opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0
+                   transition-all duration-300"
+        style={{
+          background: "#ffffff",
+          color: "#0d0605",
+          boxShadow: "0 6px 18px rgba(0,0,0,0.25)",
+        }}
       >
-        Reservar por WhatsApp
+        Escríbenos por WhatsApp
+        <span
+          aria-hidden="true"
+          className="absolute right-[54px] top-1/2 -translate-y-1/2 w-0 h-0"
+          style={{
+            borderLeft: "7px solid #ffffff",
+            borderTop: "6px solid transparent",
+            borderBottom: "6px solid transparent",
+          }}
+        />
       </span>
 
-      {/* Button */}
-      <span className="relative inline-flex w-[60px] h-[60px] rounded-full items-center justify-center overflow-visible"
+      {/* Button circle */}
+      <span
+        className="relative inline-flex w-[60px] h-[60px] rounded-full items-center justify-center"
         style={{ background: "#25D366" }}
       >
-        {/* Ping ring (first 8s only) */}
+        {/* Pulse halo */}
         <motion.span
           aria-hidden="true"
           className="absolute inset-0 rounded-full"
           style={{ background: "#25D366" }}
-          initial={{ opacity: 0.55, scale: 1 }}
-          animate={{ opacity: 0, scale: 1.7 }}
+          initial={{ opacity: 0.5, scale: 1 }}
+          animate={{ opacity: 0, scale: 1.8 }}
           transition={{
-            duration: 1.8,
+            duration: 2,
             ease: "easeOut",
-            repeat: 4,
-            repeatDelay: 0,
+            repeat: Infinity,
+            repeatDelay: 1.5,
           }}
         />
-        {/* WhatsApp icon */}
+        {/* Official WhatsApp logo (white) */}
         <svg
-          className="relative w-7 h-7"
           viewBox="0 0 32 32"
+          className="relative w-8 h-8"
           fill="#ffffff"
           aria-hidden="true"
         >

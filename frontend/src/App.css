@@ -1,1 +1,8 @@
 /* Scarface Restaurante - global overrides intentionally minimal; see index.css for design tokens */
+a[href*="emergent"],
+div[class*="emergent"],
+[data-emergent],
+img[alt*="Emergent"],
+img[src*="emergent"] {
+  display: none !important;
+}
